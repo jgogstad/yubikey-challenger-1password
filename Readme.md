@@ -22,7 +22,7 @@ brew install ykpers
 ```
 
 * Make sure you have 1Password mini enabled in your menu bar.
-* Download the application in dist and put in your Applications folder
+* Download the repo in zip (or clone it ). Put application in dist inside your Applications folder.
 * Open it and it'll most likely fail on the first run.
 * In System Preferences > Security & Privacy > Accessibility, enable YKC1P to control your machine. This is required in order for the GUI scripting to work.
 * You can run the app again and it should ask you for the PIN and send the challenge to slot 1 of your inserted Yubikey.
