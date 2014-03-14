@@ -1,7 +1,7 @@
 Yubikey Challenger for 1Password
 ================================
 
-YKC1P is an Applescript application that allows you to access to your 1Password vault using a memoized PIN and a Yubikey in challenge-response mode.
+YKC1P is an Applescript application that allows you to access to your 1Password vault using a memorized PIN and a Yubikey in challenge-response mode.
 
 ## Preparing
 
@@ -47,9 +47,9 @@ I made this in one day for my personal use, so it makes some assumptions:
 
 ## Rationale
 
-The notion of splitting your password in two componentts was already explained by Colby Aley in one of his articles where he proposes to put a big random password in one of your Yubikey slots using the static passwords mode. Having a new Yubikey at hand I wanted to make it a little harder for someone stealing my Yubikey to access the most complex part of my password. In order to achieve that this little script will allow you to send a memoized PIN to the Yubikey as a challenge and use the response as your 1Password master secret.
+The notion of splitting your password in two componentts was already explained by Colby Aley in one of his articles where he proposes to put a big random password in one of your Yubikey slots using the static passwords mode. Having a new Yubikey at hand I wanted to make it a little harder for someone stealing my Yubikey to access the most complex part of my password. In order to achieve that this little script will allow you to send a memorized PIN to the Yubikey as a challenge and use the response as your 1Password master secret.
 
-It's only a small detail on top of the static password idea in the sense that the response is always the same, this howevers makes the knowledge of the memoized part a prerequisite for the Yubikey to be any use. It also has another benefit (may seem a draback to most people I guess): You must have a client capable of challenging the Yubikey in order to use it as opposed to regular touch & go operation in the static password config.
+It's only a small detail on top of the static password idea in the sense that the response is always the same, this howevers makes the knowledge of the memorized part a prerequisite for the Yubikey to be any use. It also has another benefit (may seem a draback to most people I guess): You must have a client capable of challenging the Yubikey in order to use it as opposed to regular touch & go operation in the static password config.
 
 Special thanks to the Colby Aley and Xavier Shay for inspiring me to create this:
 
