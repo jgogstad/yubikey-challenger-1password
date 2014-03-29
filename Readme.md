@@ -6,8 +6,8 @@ YKC1P is an Applescript application that allows you to access to your 1Password 
 ## Preparing
 
 * Use the yubikey personalization tool to configure a slot in HMAC-SHA1 challenge response mode. Copy your secret if you want to have another key with it or if you'll save it in a secure location just in case.
-* The password that you need to set in 1password as master secret is the result of sending your chosen PIN (can be alphanumeric) to the key, you can do this by doing: `ykchalresp -1 myPin` from the terminal. the number one in that command indicates the target slot. Remember to touch the key to get a reponse if needed.
-* Go change the password in 1P to the response.
+* The password that you need to set in 1password as master secret is the result of sending your chosen PIN (can be alphanumeric) to the yubikey. You can do this by doing: `ykchalresp -1 myPin` from the terminal. The number one in that command indicates the target slot. Remember, if needed, to touch the key to get a reponse.
+* Go change the password in 1P to the response to that large alphanumeric lowercase string.
 * CLEAN YOUR TERMINAL HISTORY to avoid leaking your PIN.
 
 ## Installing
@@ -22,27 +22,29 @@ brew install ykpers
 ```
 
 * Make sure you have 1Password mini enabled in your menu bar.
-* Download the repo in zip (or clone it ). Put application in dist inside your Applications folder.
-* Open it and it'll most likely fail on the first run.
-* In System Preferences > Security & Privacy > Accessibility, enable YKC1P to control your machine. __This is required in order for the GUI scripting to work.__
+* Download the [latest version]() unzip and put the application __inside your Home's Applications folder. It won't work if you put it in the global Applications folder__.
+* Open it and it'll tell you it can run because it lack permissions.
+* In System Preferences > Security & Privacy > Accessibility, enable YKC1P to control your machine. __This is required in order for the GUI scripting to work.__. If the application isn't listed, drag it from the place you installed in Finder.
 * You can run the app again and it should ask you for the PIN and send the challenge to slot 1 of your inserted Yubikey.
-* Touch the key to release the response (only if this was chosen on configuration)
-* The script will use the response as master password and try to insert in the 1Password mini window. If the vault was open the mini dialog will be triggered and nothing will be done.
+* Touch the key to release the response (only if this was chosen on configuration of your Yubikey).
+* __The script will use the response as master password and try to insert in the 1Password mini window. If the vault was open the mini dialog will be triggered and nothing will be done.__
 
 ## Tips
 
-* If you want slot1 to contain challenge response mode and slot2 to have the preinstalled yubikey credentials, you can swap them with `ykpersonalize -x`. This is perfect for a nano key.
+* If you want slot1 to contain challenge response mode and slot2 to have the preinstalled yubikey credentials _(as this application asumes)_, you can swap them with `ykpersonalize -x` This is perfect for a nano key.
 * You can customize your key to use challenge response mode with "Yubikey Personalization Tool" for OS X. You can get it from [Yubico's personalization tools](http://www.yubico.com/products/services-software/personalization-tools/use/)
-* You can customize the app simply by editing the script  in the src folder with Automator and then running `./build.sh` from the root of the repo. __This could be useful if for instance your `ykchalresp` binary isn't located in `/usr/local/bin/ykchalresp` or you don't want the challenge to be sent to slot #1__ I think editing the app is way simpler than creting a configuration file.
+* Ideally you should __use an Alfred2 workflow with a custom shortcut to trigger this app so that you have an easy way to open your vault when required__. I created a small alfred workflow that does exactly this (tracked in the repo just in case), doing the same on your preferred tool should be trivial.
+
+## How to edit the app
+
+You can customize the app simply by editing the script in the src folder with Automator, saving and then running `make install` from the root of the repo. __This could be useful if for instance your `ykchalresp` binary isn't located in `/usr/local/bin/ykchalresp` or you don't want the challenge to be sent to slot #1__ I think editing the app is way simpler than creting a configuration file. Check the makefile for understanding what it does it's like 50 lines with a lot of whitespace!
 
 ## Important notes
 
-I made this in one day for my personal use, so it makes some assumptions:
+__I made this in one day for my personal use, so it makes some assumptions:__
 
-* You can ensure your master secret is available by saving a copy of it in a secure location like a safe or something. Alternatively you can save your Yubikeys secret and the PIN, this would allow you to install the same secret in another Yubikey or a piece of software and get your password by providing the exact same ping. Remember there's no way to restore your vault if your password is lost.
-* Slot 1 is set in HMAC-SHA1 challenge response mode. I used this slot because that way when I accidentally touch my Yubikey Nano I don't see any input in the screen. If you want to use slot 2 you must edit the application script and change the challenge command options from `-2`to `-1`. To do this open the app with Automator.
-* It's assumed that you must touch the key in order to sent the response back to the machine, I do this as a security measure to ensure that malware in my machine would still need human intervention to access the key. Because of this assumption you'll see a notification as a reminder in your screen right after you enter your pin.
-* Ideally you should use Alfred2 or a custom shortcut to trigger this app so that you have an easy way to open your vault when required. I created a small alfred workflow that does exactly this, doing the same on your preferred tool should be trivial.
+* You can ensure your master secret is available by saving a copy of it in a secure location like a safe or something. Alternatively you can save your Yubikeys secret and the PIN, this would allow you to install the same secret in another Yubikey or a piece of software and get your password by providing the exact same ping. _Remember there's no way to restore your vault if your password is lost._
+* __Slot 1 is set in HMAC-SHA1 challenge response mode. I used this slot because that way when I accidentally touch my Yubikey Nano I don't see any input in the screen.__ If you want to use slot 2 you must edit the application script and change the challenge command options from `-2`to `-1`. To do this open the app with Automator.
 * I'm a total newbie to Applescript and Yubikeys in general, if you see important errors please let me know.
 
 
