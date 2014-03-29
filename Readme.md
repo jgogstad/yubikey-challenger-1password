@@ -24,7 +24,7 @@ brew install ykpers
 * Make sure you have 1Password mini enabled in your menu bar.
 * Download the repo in zip (or clone it ). Put application in dist inside your Applications folder.
 * Open it and it'll most likely fail on the first run.
-* In System Preferences > Security & Privacy > Accessibility, enable YKC1P to control your machine. _This is required in order for the GUI scripting to work._
+* In System Preferences > Security & Privacy > Accessibility, enable YKC1P to control your machine. __This is required in order for the GUI scripting to work.__
 * You can run the app again and it should ask you for the PIN and send the challenge to slot 1 of your inserted Yubikey.
 * Touch the key to release the response (only if this was chosen on configuration)
 * The script will use the response as master password and try to insert in the 1Password mini window. If the vault was open the mini dialog will be triggered and nothing will be done.
@@ -33,6 +33,7 @@ brew install ykpers
 
 * If you want slot1 to contain challenge response mode and slot2 to have the preinstalled yubikey credentials, you can swap them with `ykpersonalize -x`. This is perfect for a nano key.
 * You can customize your key to use challenge response mode with "Yubikey Personalization Tool" for OS X. You can get it from [Yubico's personalization tools](http://www.yubico.com/products/services-software/personalization-tools/use/)
+* You can customize the app simply by editing the script  in the src folder with AppleScript Editora nd then running `./build` from the root of the repo. __This could be useful if for instance your `ykchalresp` binary isn't located in `/usr/local/bin/ykchalresp` or you don't want the challenge to be sent to slot #1__
 
 ## Important notes
 

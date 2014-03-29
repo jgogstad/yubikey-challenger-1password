@@ -17,7 +17,7 @@ else
 fi
 
 say "Compiling to $target"
-osacompile -o "$target" src/challenger.scpt
+osacompile -o "$target" src/challenger.applescript
 
 say "Adding yubikey icon to application"
 rm "$icon_path"
