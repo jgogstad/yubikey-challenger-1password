@@ -24,7 +24,7 @@ brew install ykpers
 * Make sure you have 1Password mini enabled in your menu bar.
 * Download the repo in zip (or clone it ). Put application in dist inside your Applications folder.
 * Open it and it'll most likely fail on the first run.
-* In System Preferences > Security & Privacy > Accessibility, enable YKC1P to control your machine. This is required in order for the GUI scripting to work.
+* In System Preferences > Security & Privacy > Accessibility, enable YKC1P to control your machine. _This is required in order for the GUI scripting to work._
 * You can run the app again and it should ask you for the PIN and send the challenge to slot 1 of your inserted Yubikey.
 * Touch the key to release the response (only if this was chosen on configuration)
 * The script will use the response as master password and try to insert in the 1Password mini window. If the vault was open the mini dialog will be triggered and nothing will be done.

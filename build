@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+target=dist/YKC1P.app
+icon_path="$target/Contents/Resources/applet.icns"
+
+if [ -d dist ] ; then
+	echo "Dist folder exists. Trying to delete previosly compiled app."
+	test -e $target || rm -R $target
+else
+	echo "Creating dist folder"
+	mkdir dist
+fi
+
+echo "Compiling to $target"
+osacompile -o $target src/challenger.scpt
+
+echo "Adding yubikey icon to application"
+rm "$icon_path"
+cp src/yubikey.icns "$icon_path"
+
+echo "Application ready to be installed in dist folder"
