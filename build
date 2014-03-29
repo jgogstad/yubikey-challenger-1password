@@ -4,9 +4,6 @@ function say (){
 	echo "=> $1"
 }
 
-target=dist/YKC1P.app
-icon_path="$target/Contents/Resources/applet.icns"
-
 if [ -d dist ] ; then
 	say "Dist folder exists. Deleting all its contents."
 	rm -R dist/*
@@ -16,15 +13,18 @@ else
 	mkdir dist
 fi
 
-say "Compiling to $target"
-osacompile -o "$target" src/challenger.applescript
+target_bundle="dist/YKC1P.app"
+
+say "Copying base to $target_bundle"
+cp -r "src/bundle_base.app" "$target_bundle"
 
 say "Adding yubikey icon to application"
-rm "$icon_path"
-cp src/yubikey.icns "$icon_path"
+target_icon_path="$target_bundle/Contents/Resources/AutomatorApplet.icns"
+rm "$target_icon_path"
+cp "src/Yubikey.icns" "$target_icon_path"
 
 say "Compressing Application as zip package"
-zip -q -r "$target.zip" "$target"
+zip -q -r "$target_bundle.zip" "$target_bundle"
 
 echo
 echo "OK. Results can be found in ./dist"

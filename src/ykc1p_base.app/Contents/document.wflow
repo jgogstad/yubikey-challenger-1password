@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>381</string>
+	<key>AMApplicationVersion</key>
+	<string>2.4</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>actions</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>E8F352E9-9D4B-4BCD-9517-958D95A6D1E6</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run AppleScript.action</string>
+				<key>ActionName</key>
+				<string>Run AppleScript</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>source</key>
+					<string>on unlock_vault(pin)	set masterpass to my challenge(pin)	if my is_closed() then my toggle_mini()	tell application "System Events" to tell process "1Password mini"		keystroke masterpass		keystroke return	end tellend unlock_vaulton is_locked()	tell application "System Events" to tell process "1Password mini"		set unlock_button to a reference to button "Unlock" of window 1		if unlock_button exists then			return true		else			return false		end if	end tellend is_lockedon is_closed()	tell application "System Events" to tell process "1Password mini"		if (window 1) exists then			return false		else			return true		end if	end tellend is_closedon toggle_mini()	tell application "System Events" to tell process "1Password mini"		click menu bar item 1 of menu bar 1	end tellend toggle_minion challenge(chal)	set ykcmd to "/usr/local/bin/ykchalresp -1 " &amp; chal	-- set msg to "Challenge sent to Yubikey."	-- display notification msg with title "YKC1P"	delay 0.1 -- take some time before continuing	set master to (do shell script ykcmd)	return masterend challengeon icon()	-- takes yubikey icon from the personalization tool	-- set ykicon to "/Applications/YubiKey Personalization Tool.app/Contents/Resources/Yubico.icns"	-- return POSIX file ykicon as alias	-- set base to (path to me as text)	return (path to resource "AutomatorApplet.icns")	end iconon pin_handler()	tell application "Alfred 2"		activate		set yubikeyIcon to my icon()		try			set dg to display dialog ¬				¬					"Please enter your Yubikey challenge PIN to proceed with the authentication:" with title "Yubikey challenge" buttons {"Cancel", "OK"} ¬				default button "OK" default answer ¬				"" with icon yubikeyIcon with hidden answer			activate dg			set pin to text returned of dg			if pin is not equal to "" then my unlock_vault(pin)		on error number -128			return false		end try	end tellend pin_handleron run {}	try		if my is_closed() then my toggle_mini() -- open it if closed		if my is_locked() then -- we must close it again for the pin dialog to appear			my toggle_mini()			my pin_handler()		end if	on error number -25211		display alert "YKC1P got an error: Access for assistive devices is disabled. Please and try again after activating the YKC1P in System Preferences &gt; Security &amp; Privacy &gt; Accessibility." as critical		return false	end tryend run</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.RunScript</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunScriptAction</string>
+				<key>InputUUID</key>
+				<string>F94A1034-8532-4A4C-9F0E-38CD60465166</string>
+				<key>Keywords</key>
+				<array>
+					<string>Run</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>7755B805-E400-48DD-B793-4954A3AFF837</string>
+				<key>UUID</key>
+				<string>5D830F16-051B-43A8-BF66-E01F01B50BFE</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string>on run {input, parameters}
+	
+	(* Your script goes here *)
+	
+	return input
+end run</string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>449.500000:730.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/English.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+	</array>
+	<key>connectors</key>
+	<dict/>
+	<key>workflowMetaData</key>
+	<dict>
+		<key>workflowTypeIdentifier</key>
+		<string>com.apple.Automator.application</string>
+	</dict>
+</dict>
+</plist>

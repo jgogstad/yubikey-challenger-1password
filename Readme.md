@@ -14,7 +14,7 @@ YKC1P is an Applescript application that allows you to access to your 1Password 
 
 I have only tried this on Mavericks with 1Password 4.
 
-_Make sure you have installed ykpers. If you don't have it you can do this:
+__Make sure you have installed ykpers.__ If you don't have it you can do this:
 
 ```
 brew update
@@ -33,7 +33,7 @@ brew install ykpers
 
 * If you want slot1 to contain challenge response mode and slot2 to have the preinstalled yubikey credentials, you can swap them with `ykpersonalize -x`. This is perfect for a nano key.
 * You can customize your key to use challenge response mode with "Yubikey Personalization Tool" for OS X. You can get it from [Yubico's personalization tools](http://www.yubico.com/products/services-software/personalization-tools/use/)
-* You can customize the app simply by editing the script  in the src folder with AppleScript Editora nd then running `./build` from the root of the repo. __This could be useful if for instance your `ykchalresp` binary isn't located in `/usr/local/bin/ykchalresp` or you don't want the challenge to be sent to slot #1__
+* You can customize the app simply by editing the script  in the src folder with Automator and then running `./build.sh` from the root of the repo. __This could be useful if for instance your `ykchalresp` binary isn't located in `/usr/local/bin/ykchalresp` or you don't want the challenge to be sent to slot #1__ I think editing the app is way simpler than creting a configuration file.
 
 ## Important notes
 
@@ -57,6 +57,6 @@ Special thanks to the Colby Aley and Xavier Shay for inspiring me to create this
 [Replacing Google Authenticator with Yubikey on OSX](http://corner.squareup.com/2013/05/replacing-google-authenticator-with-yubikey-on-osx.html)
 [I know none of my passwords.](http://aley.me/passwords)
 
-Copyright note: I've taken the Yubicon.icns from the OS X personalization tool app, I suppose Yubico will not matter but should you own any rights on that icon and want me to take it down, please let me know ;)
+Copyright note: I've taken the Yubicon.icns from the OS X personalization tool app, I suppose Yubico will not care. Nonetheless, should you own any rights on that icon and want me to take it down, please let me know :)
 
 This is licensed under MIT without any warranties, please use it at your own risk.
