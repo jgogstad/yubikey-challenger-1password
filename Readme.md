@@ -54,7 +54,7 @@ The notion of splitting your password in two componentts was already explained b
 
 It's only a small detail on top of the static password idea in the sense that the response is always the same, this howevers makes the knowledge of the memorized part a prerequisite for the Yubikey to be any use. It also has another benefit (may seem a draback to most people I guess): You must have a client capable of challenging the Yubikey in order to use it as opposed to regular touch & go operation in the static password config.
 
-Special thanks to the Colby Aley and Xavier Shay for inspiring me to create this:
+Special thanks to Colby Aley and Xavier Shay for inspiring me to create this:
 
 * [Replacing Google Authenticator with Yubikey on OSX](http://corner.squareup.com/2013/05/replacing-google-authenticator-with-yubikey-on-osx.html)
 * [I know none of my passwords.](http://aley.me/passwords)
