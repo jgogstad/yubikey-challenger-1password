@@ -56,8 +56,8 @@ It's only a small detail on top of the static password idea in the sense that th
 
 Special thanks to the Colby Aley and Xavier Shay for inspiring me to create this:
 
-[Replacing Google Authenticator with Yubikey on OSX](http://corner.squareup.com/2013/05/replacing-google-authenticator-with-yubikey-on-osx.html)
-[I know none of my passwords.](http://aley.me/passwords)
+* [Replacing Google Authenticator with Yubikey on OSX](http://corner.squareup.com/2013/05/replacing-google-authenticator-with-yubikey-on-osx.html)
+* [I know none of my passwords.](http://aley.me/passwords)
 
 Copyright note: I've taken the Yubicon.icns from the OS X personalization tool app, I suppose Yubico will not care. Nonetheless, should you own any rights on that icon and want me to take it down, please let me know :)
 
