@@ -1,21 +1,30 @@
 #!/usr/bin/env bash
 
+function say (){
+	echo "=> $1"
+}
+
 target=dist/YKC1P.app
 icon_path="$target/Contents/Resources/applet.icns"
 
 if [ -d dist ] ; then
-	echo "Dist folder exists. Trying to delete previosly compiled app."
-	test -e $target || rm -R $target
+	say "Dist folder exists. Deleting all its contents."
+	rm -R dist/*
+	ls dist
 else
-	echo "Creating dist folder"
+	say "Creating dist folder"
 	mkdir dist
 fi
 
-echo "Compiling to $target"
-osacompile -o $target src/challenger.scpt
+say "Compiling to $target"
+osacompile -o "$target" src/challenger.scpt
 
-echo "Adding yubikey icon to application"
+say "Adding yubikey icon to application"
 rm "$icon_path"
 cp src/yubikey.icns "$icon_path"
 
-echo "Application ready to be installed in dist folder"
+say "Compressing Application as zip package"
+zip -q -r "$target.zip" "$target"
+
+echo
+echo "OK. Results can be found in ./dist"
