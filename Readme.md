@@ -8,7 +8,7 @@ YKC1P is an Applescript application that allows you to access to your 1Password 
 * Use the yubikey personalization tool to configure a slot in HMAC-SHA1 challenge response mode. Copy your secret if you want to have another key with it or if you'll save it in a secure location just in case.
 * The password that you need to set in 1password as master secret is the result of sending your chosen PIN (can be alphanumeric) to the yubikey. You can do this by doing: `ykchalresp -1 myPin` from the terminal. The number one in that command indicates the target slot. Remember, if needed, to touch the key to get a reponse.
 * Go change the password in 1P to the response to that large alphanumeric lowercase string.
-* CLEAN YOUR TERMINAL HISTORY to avoid leaking your PIN.
+* __CLEAN YOUR TERMINAL HISTORY to avoid leaking your PIN.__
 
 ## Installing
 
