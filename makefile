@@ -13,20 +13,23 @@ define log
     @echo "\n$(YELLOW)=> $1$(NORMAL)"
 endef
 
-build: clean copy icon zip
+build: clean copy name icon zip
 	$(call log,"Build to ./dist complete")
 	
 
 clean:
 	@echo "Building Yubikey Challenger for 1Password..."
-	$(call log,"Cleaning/creating ./dist")
+	$(call log,"Cleaning and creating ./dist")
+	if [[ -d dist ]]; then rm -fR dist; fi
 	mkdir -p dist
-	rm -fR dist/*
 
 copy:
 	$(call log,"Copying base to $(TARGET_BUNDLE)")
 	cp -r "src/ykc1p.app" "$(TARGET_BUNDLE)"
 
+name:
+	$(call log,"Changing bundle name to application")
+	sed -i "" "s/com\.apple\.automator\.ykc1p/co\.vlipco\.ykc1p/g" "$(TARGET_BUNDLE)/Contents/Info.plist"
 icon:
 	$(call log,"Adding Yubikey icon to application")
 	rm "$(TARGET_ICON)"
