@@ -20,11 +20,12 @@ build: clean copy icon zip
 clean:
 	@echo "Building Yubikey Challenger for 1Password..."
 	$(call log,"Cleaning/creating ./dist")
-	rm -fR dist/* || mkdir dist
+	mkdir -p dist
+	rm -fR dist/*
 
 copy:
 	$(call log,"Copying base to $(TARGET_BUNDLE)")
-	cp -r "src/ykc1p_base.app" "$(TARGET_BUNDLE)"
+	cp -r "src/ykc1p.app" "$(TARGET_BUNDLE)"
 
 icon:
 	$(call log,"Adding Yubikey icon to application")
