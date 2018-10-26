@@ -12,7 +12,7 @@ YKC1P is an Applescript application that allows you to access to your 1Password 
 
 ## Installing
 
-I have only tried this on Mavericks with 1Password 4.
+~I have only tried this on Mavericks with 1Password 4.~ Tested OK on Mojave, 1Password 7
 
 __Make sure you have installed ykpers.__ If you don't have it you can do this:
 
@@ -32,8 +32,8 @@ brew install ykpers
 ## Tips
 
 * If you want slot1 to contain challenge response mode and slot2 to have the preinstalled yubikey credentials _(as this application asumes)_, you can swap them with `ykpersonalize -x` This is perfect for a nano key.
-* You can customize your key to use challenge response mode with "Yubikey Personalization Tool" for OS X. You can get it from [Yubico's personalization tools](http://www.yubico.com/products/services-software/personalization-tools/use/)
-* Ideally you should __use an Alfred2 workflow with a custom shortcut to trigger this app so that you have an easy way to open your vault when required__. I created a small alfred workflow that does exactly this (tracked in the repo just in case), doing the same on your preferred tool should be trivial.
+* You can customize your key to use challenge response mode with "Yubikey Personalization Tool" for OS X. You can get it from [Yubico's personalization tools](http://www.yubico.com/products/services-software/personalization-tools/use/) or `brew cask install yubico-yubikey-personalization-gui`
+* Ideally you should __use an Alfred3 workflow with a custom shortcut to trigger this app so that you have an easy way to open your vault when required__. I created a small alfred workflow that does exactly this (tracked in the repo just in case), doing the same on your preferred tool should be trivial.
 
 ## How to edit the app
 
