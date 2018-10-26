@@ -43,9 +43,6 @@ install: build
 	$(call log,"Removing old version")
 	rm -fR "$(INSTALL_PATH)"
 	
-	$(call log,"Cleaning previous Accessibility authorizations \(requires sudo\)")
-	sudo sqlite3 /Library/Application\ Support/com.apple.TCC/Tcc.db 'DELETE FROM access WHERE client LIKE "%YKC1P%"'
-
 	$(call log,"Installing fresh app")
 	cp -r "$(TARGET_BUNDLE)" "$(INSTALL_PATH)"
 	@echo "\n$(RED)IMPORTANT!$(NORMAL) Remember to enable the app in System Preferences > Security & Privacy > Accessibility"
