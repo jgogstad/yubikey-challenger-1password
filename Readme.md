@@ -2,7 +2,7 @@ Fork of [vlipco-archive/yubikey-challenger-1password](https://github.com/vlipco-
 
 * Works with 1Password 7
 * Slot 1 is used for HMAC-SHA1 Challenge-response
-* Removed manipulation of the TCC db, it's read-only since Mojave
+* Removed manipulation of the TCC db in Makefile, it's read-only since Mojave
 
 See [yubikey-challenger-1password/pull/5](https://github.com/vlipco-archive/yubikey-challenger-1password/pull/5)
 
