@@ -3,7 +3,7 @@ Fork of [vlipco-archive/yubikey-challenger-1password](https://github.com/vlipco-
 **Updates**
 
 * Works with 1Password 7
-* Removed manipulation of the TCC db in Makefile, it's read-only since Mojave
+* Removed manipulation of the TCC db in Makefile, it's read-only since Mojave. This means you manually need to re-add permissions under Accessibility in Security $ Privacy every time you do `make install`.
 
 **Changes**
 
