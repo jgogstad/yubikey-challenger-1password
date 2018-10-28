@@ -1,10 +1,14 @@
 Fork of [vlipco-archive/yubikey-challenger-1password](https://github.com/vlipco-archive/yubikey-challenger-1password)
 
+**Updates**
+
 * Works with 1Password 7
-* Slot 1 is used for HMAC-SHA1 Challenge-response
 * Removed manipulation of the TCC db in Makefile, it's read-only since Mojave
 
-See [yubikey-challenger-1password/pull/5](https://github.com/vlipco-archive/yubikey-challenger-1password/pull/5)
+**Changes**
+
+* After you press the button on your Yubikey, the master password is entered as keypress events. This enables you to enter your password to input fields (for instance on 1password.com), without copying it to the clipboard. Needless to say, having your master password on the clipboard makes it visible to all running processes, in addition to it being stored by any clipboard history tool.
+* Updated documentation with more tips and slight adaptions for Mojave and 1Password 7
 
 Yubikey Challenger for 1Password
 ================================
@@ -13,14 +17,32 @@ YKC1P is an Applescript application that allows you to access to your 1Password 
 
 ## Preparing
 
-* Use the yubikey personalization tool to configure a slot in HMAC-SHA1 challenge response mode. Copy your secret if you want to have another key with it or if you'll save it in a secure location just in case.
+* Use the yubikey personalization tool to configure a slot in HMAC-SHA1 challenge response mode. Use "Fixed 64 byte input" if you want to configure multiple keys.
+
 * The password that you need to set in 1password as master secret is the result of sending your chosen PIN (can be alphanumeric) to the yubikey. You can do this by doing: `ykchalresp -1 myPin` from the terminal. The number one in that command indicates the target slot. Remember, if needed, to touch the key to get a reponse.
-* Go change the password in 1P to the response to that large alphanumeric lowercase string.
+
+* Go change the password in 1Password to that large alphanumeric lowercase string.
+
 * __CLEAN YOUR TERMINAL HISTORY to avoid leaking your PIN.__
+
+  * ZSH tip: In order to avoid secrets leaking to your shell's history file, consider `setopt histignorespace` (command prefixed with a space is not added to history), and/or add the following function to your `.zshrc` to always ignore adding `ykchalresp` to history:
+
+    ```
+    function zshaddhistory() {
+        emulate -L zsh
+        if [[ $1 != "ykchalresp"* ]] ; then
+            print -sr -- "${1%%$'\n'}"
+            fc -p
+        else
+            return 1
+        fi
+      }
+    ```
+
 
 ## Installing
 
-~I have only tried this on Mavericks with 1Password 4.~ Tested OK on Mojave, 1Password 7
+Tested OK on macOS Mojave, 1Password 7
 
 __Make sure you have installed ykpers.__ If you don't have it you can do this:
 
@@ -29,18 +51,17 @@ brew update
 brew install ykpers
 ```
 
-* Make sure you have 1Password mini enabled in your menu bar.
 * Download the [latest version]() unzip and put the application __inside your Home's Applications folder. It won't work if you put it in the global Applications folder__.
 * Open it and it'll tell you it can run because it lack permissions.
-* In System Preferences > Security & Privacy > Accessibility, enable YKC1P to control your machine. __This is required in order for the GUI scripting to work.__. If the application isn't listed, drag it from the place you installed in Finder.
+* In System Preferences > Security & Privacy > Accessibility, enable YKC1P to control your machine. __This is required in order for the GUI scripting to work.__ If the application isn't listed, drag it from the place you installed in Finder.
 * You can run the app again and it should ask you for the PIN and send the challenge to slot 1 of your inserted Yubikey.
 * Touch the key to release the response (only if this was chosen on configuration of your Yubikey).
-* __The script will use the response as master password and try to insert in the 1Password mini window. If the vault was open the mini dialog will be triggered and nothing will be done.__
+* __The script will write the master password to whatever had focus before you invoked the script__
 
 ## Tips
 
 * If you want slot1 to contain challenge response mode and slot2 to have the preinstalled yubikey credentials _(as this application asumes)_, you can swap them with `ykpersonalize -x` This is perfect for a nano key.
-* You can customize your key to use challenge response mode with "Yubikey Personalization Tool" for OS X. You can get it from [Yubico's personalization tools](http://www.yubico.com/products/services-software/personalization-tools/use/) or `brew cask install yubico-yubikey-personalization-gui`
+* You can customize your key to use challenge response mode with "Yubikey Personalization Tool" for macOS. You can get it from [Yubico's personalization tools](http://www.yubico.com/products/services-software/personalization-tools/use/) or `brew cask install yubico-yubikey-personalization-gui`
 * Ideally you should __use an Alfred3 workflow with a custom shortcut to trigger this app so that you have an easy way to open your vault when required__. I created a small alfred workflow that does exactly this (tracked in the repo just in case), doing the same on your preferred tool should be trivial.
 
 ## How to edit the app
